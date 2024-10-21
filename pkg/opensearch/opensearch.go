@@ -13,7 +13,7 @@ import (
 var ErrInvalidInput = errors.New("odata syntax error")
 
 // ODataQuery creates an OpenSearch query based on odata parameters
-func ODataQuery(query url.Values, object interface{}) (map[string]interface{}, error) {
+func ODataQuery(query url.Values) (map[string]interface{}, error) {
 	//fmt.Println("ODataQuery", query)
 	var filterObj map[string]interface{}
 
