@@ -10,7 +10,7 @@ import (
 	"errors"
 	"strings"
 
-	"godata/parser/validatefield"
+	"github.com/lagerstrom/godata/parser/validatefield"
 )
 
 // OrderItem holds order key information

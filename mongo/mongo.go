@@ -16,7 +16,7 @@ import (
 	"github.com/globalsign/mgo/bson"
 	"github.com/pkg/errors"
 
-	"godata/parser"
+	"github.com/lagerstrom/godata/parser"
 )
 
 // ErrInvalidInput Client errors

@@ -1,4 +1,4 @@
-module godata
+module github.com/lagerstrom/godata
 
 go 1.12
 
