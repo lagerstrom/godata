@@ -40,6 +40,15 @@ type Token struct {
 	Type        int
 }
 
+func (t Token) CleanStringValue() interface{} {
+	switch t.Type {
+	case filterTokenString:
+		return strings.Trim(t.stringValue, "'")
+	default:
+		return t.Value
+	}
+}
+
 // Add adds token to the tokenizer
 func (t *Tokenizer) add(pattern string, token int) {
 	rxp := regexp.MustCompile(pattern)
@@ -162,7 +171,7 @@ func (p *Parser) defineFunction(token string, params int) {
 // InfixToPostfix Parses the input string of tokens using the given definitions of operators
 // and functions. (Everything else is assumed to be a literal.) Uses the
 // Shunting-Yard algorithm.
-//nolint :gocyclo
+// nolint :gocyclo
 func (p *Parser) infixToPostfix(tokens []*Token) (*tokenQueue, error) {
 	queue := tokenQueue{}
 	stack := tokenStack{}
@@ -248,7 +257,7 @@ func (p *Parser) infixToPostfix(tokens []*Token) (*tokenQueue, error) {
 }
 
 // PostfixToTree Converts a Postfix token queue to a parse tree
-//nolint :gocyclo
+// nolint :gocyclo
 func (p *Parser) postfixToTree(queue *tokenQueue) (*ParseNode, error) {
 	stack := &nodeStack{}
 	currNode := &ParseNode{}
@@ -313,7 +322,7 @@ func (p *Parser) postfixToTree(queue *tokenQueue) (*ParseNode, error) {
 }
 
 // checkChildType Checks to make sure children types are compatible
-//nolint :gocyclo
+// nolint :gocyclo
 func checkChildType(child []*ParseNode) bool {
 	// Make sure we have 2 children in the tree
 	if len(child) != 2 {

@@ -10,7 +10,7 @@ import (
 	"errors"
 	"strings"
 
-	"github.com/intel/rsp-sw-toolkit-im-suite-go-odata/parser/validatefield"
+	"godata/parser/validatefield"
 )
 
 // OrderItem holds order key information

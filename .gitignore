@@ -9,3 +9,7 @@ vendor/*
 /parser/debug.test
 
 go.sum
+
+*~
+#*#
+.idea/*

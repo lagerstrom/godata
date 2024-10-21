@@ -14,8 +14,9 @@ import (
 
 	"github.com/globalsign/mgo"
 	"github.com/globalsign/mgo/bson"
-	"github.com/intel/rsp-sw-toolkit-im-suite-go-odata/parser"
 	"github.com/pkg/errors"
+
+	"godata/parser"
 )
 
 // ErrInvalidInput Client errors
@@ -26,7 +27,7 @@ var ErrInvalidInput = errors.New("odata syntax error")
 var filterObj bson.M
 
 // ODataQuery creates a mgo query based on odata parameters
-//nolint :gocyclo
+// nolint :gocyclo
 func ODataQuery(query url.Values, object interface{}, collection *mgo.Collection) error {
 
 	// Parse url values
@@ -90,7 +91,7 @@ func ODataInlineCount(collection *mgo.Collection) (int, error) {
 	return collection.Find(filterObj).Count()
 }
 
-//nolint :gocyclo
+// nolint :gocyclo
 func applyFilter(node *parser.ParseNode) (bson.M, error) {
 
 	filter := make(bson.M)
