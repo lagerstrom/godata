@@ -80,26 +80,26 @@ func applyFilter(node *parser.ParseNode) (map[string]interface{}, error) {
 	if _, ok := node.Token.Value.(string); ok {
 		switch node.Token.Value {
 		case "eq":
-			filter["term"] = map[string]interface{}{node.Children[0].Token.Value.(string) + ".keyword": node.Children[1].Token.CleanStringValue()}
+			filter["term"] = map[string]interface{}{node.Children[0].Token.Value.(string): node.Children[1].Token.CleanStringValue()}
 
 		case "ne":
 			filter["bool"] = map[string]interface{}{
 				"must_not": map[string]interface{}{
-					"term": map[string]interface{}{node.Children[0].Token.Value.(string) + ".keyword": node.Children[1].Token.CleanStringValue()},
+					"term": map[string]interface{}{node.Children[0].Token.Value.(string): node.Children[1].Token.CleanStringValue()},
 				},
 			}
 
 		case "gt":
-			filter["range"] = map[string]interface{}{node.Children[0].Token.Value.(string) + ".keyword": map[string]interface{}{"gt": node.Children[1].Token.CleanStringValue()}}
+			filter["range"] = map[string]interface{}{node.Children[0].Token.Value.(string): map[string]interface{}{"gt": node.Children[1].Token.CleanStringValue()}}
 
 		case "ge":
-			filter["range"] = map[string]interface{}{node.Children[0].Token.Value.(string) + ".keyword": map[string]interface{}{"gte": node.Children[1].Token.CleanStringValue()}}
+			filter["range"] = map[string]interface{}{node.Children[0].Token.Value.(string): map[string]interface{}{"gte": node.Children[1].Token.CleanStringValue()}}
 
 		case "lt":
-			filter["range"] = map[string]interface{}{node.Children[0].Token.Value.(string) + ".keyword": map[string]interface{}{"lt": node.Children[1].Token.CleanStringValue()}}
+			filter["range"] = map[string]interface{}{node.Children[0].Token.Value.(string): map[string]interface{}{"lt": node.Children[1].Token.CleanStringValue()}}
 
 		case "le":
-			filter["range"] = map[string]interface{}{node.Children[0].Token.Value.(string) + ".keyword": map[string]interface{}{"lte": node.Children[1].Token.CleanStringValue()}}
+			filter["range"] = map[string]interface{}{node.Children[0].Token.Value.(string): map[string]interface{}{"lte": node.Children[1].Token.CleanStringValue()}}
 
 		case "and":
 			leftFilter, err := applyFilter(node.Children[0])
@@ -128,17 +128,17 @@ func applyFilter(node *parser.ParseNode) (map[string]interface{}, error) {
 			}
 
 		case "startswith":
-			filter["prefix"] = map[string]interface{}{node.Children[0].Token.Value.(string) + ".keyword": node.Children[1].Token.CleanStringValue()}
+			filter["prefix"] = map[string]interface{}{node.Children[0].Token.Value.(string): node.Children[1].Token.CleanStringValue()}
 
 		case "contains":
 			if node.Children[1].Token.CleanStringValue() == "" {
-				filter["wildcard"] = map[string]interface{}{node.Children[0].Token.Value.(string) + ".keyword": "*"}
+				filter["wildcard"] = map[string]interface{}{node.Children[0].Token.Value.(string): "*"}
 			} else {
-				filter["wildcard"] = map[string]interface{}{node.Children[0].Token.Value.(string) + ".keyword": "*" + node.Children[1].Token.CleanStringValue().(string) + "*"}
+				filter["wildcard"] = map[string]interface{}{node.Children[0].Token.Value.(string): "*" + node.Children[1].Token.CleanStringValue().(string) + "*"}
 			}
 
 		case "endswith":
-			filter["wildcard"] = map[string]interface{}{node.Children[0].Token.Value.(string) + ".keyword": "*" + node.Children[1].Token.CleanStringValue().(string)}
+			filter["wildcard"] = map[string]interface{}{node.Children[0].Token.Value.(string): "*" + node.Children[1].Token.CleanStringValue().(string)}
 		}
 	}
 	return filter, nil
