@@ -1,6 +1,6 @@
 # go-odata
 
-A golang package to create ODATA REST APIs for MongoDB and PostgreSQL (jsonb)
+A golang package to create ODATA REST APIs for MongoDB, PostgreSQL (jsonb) and Opensearch
 
 ## commands and Examples
 
