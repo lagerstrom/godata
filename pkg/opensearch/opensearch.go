@@ -37,9 +37,9 @@ func ODataQuery(query url.Values) (map[string]interface{}, error) {
 	}
 
 	// Prepare Select
-	selectFields := []string{}
-	if queryMap["$select"] != nil {
-		selectSlice := reflect.ValueOf(queryMap["$select"])
+	selectFields := make([]string, 0)
+	if queryMap[parser.Select] != nil {
+		selectSlice := reflect.ValueOf(queryMap[parser.Select])
 		if selectSlice.Len() > 1 && selectSlice.Index(0).Interface().(string) != "*" {
 			for i := 0; i < selectSlice.Len(); i++ {
 				fieldName := selectSlice.Index(i).Interface().(string)
@@ -49,7 +49,7 @@ func ODataQuery(query url.Values) (map[string]interface{}, error) {
 	}
 
 	// Sort
-	sortFields := []map[string]string{}
+	sortFields := make([]map[string]string, 0)
 	if queryMap[parser.OrderBy] != nil {
 		orderBySlice := queryMap[parser.OrderBy].([]parser.OrderItem)
 		for _, item := range orderBySlice {
